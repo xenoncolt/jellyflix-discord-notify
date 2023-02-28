@@ -1,0 +1,99 @@
+{{#if_equals IsPaused 'True'}}
+{
+    "content": "{{MentionType}}",
+    "avatar_url": "{{ServerUrl}}/Users/{{UserId}}/Images/Primary",
+    "username": "{{NotificationUsername}}",
+    "embeds": [
+        {
+            "author": {
+                "name": "Paused Watching",
+                "icon_url": "https://cdn.discordapp.com/attachments/832180255103385650/1079717093416636506/pause-button-png-6.png"
+            
+            },
+            {{#if_equals ItemType 'Episode'}}
+            "title": "{{{SeriesName}}}",
+            {{else}}
+            "title": "{{{Name}}} ({{Year}})",
+            {{/if_equals}}
+
+            "url": "{{ServerUrl}}/web/index.html#!/details?id={{ItemId}}&serverId={{ServerId}}",
+            
+            "thumbnail":{
+                "url": "{{ServerUrl}}/Items/{{ItemId}}/Images/Primary"
+            },
+            
+            {{#if_equals ItemType 'Movie'}}
+            "description": "{{Overview}}",
+            {{/if_equals}}
+
+            "color": "{{EmbedColor}}",
+            "fields": [
+            {{#if_equals ItemType 'Episode'}}
+            {
+                "name": "Name",
+                "value": "{{Name}}",
+                "inline": true  
+            },
+            {
+                "name": "Season",
+                "value": "{{SeasonNumber00}}",
+                "inline": true
+            },
+            {
+                "name": "Episode",
+                "value": "{{EpisodeNumber00}}",
+                "inline": true
+            },
+            {
+                "name": "Overview",
+                "value": "{{Overview}}",
+                "inline": false
+            },
+            {{/if_equals}}
+            {
+                "name": "Media Type",
+                "value": "{{ItemType}}",
+                "inline": true
+            },
+            {
+                "name": "Year",
+                "value": "{{Year}}",
+                "inline": true
+            },
+            {
+                "name": "Player",
+                "value": "{{ClientName}}",
+                "inline": true
+            },
+            {
+                "name": "Device",
+                "value": "{{DeviceName}}",
+                "inline": true
+            },
+            {
+                "name": "Paused",
+                "value": "{{IsPaused}}",
+                "inline": true
+            },
+            {
+                "name": "Autoplay",
+                "value": "{{IsAutomated}}",
+                "inline": true
+            },
+            {
+                "name": "Duration",
+                "value": "`{{PlaybackPosition}}/{{RunTime}}`",
+                "inline": true
+            }
+            ],
+
+            "footer": {
+                "text": "{{{ServerName}}}",
+                "icon_url": "{{AvatarUrl}}"
+            },
+
+            "timestamp": "{{Timestamp}}"
+        }
+    ]
+}
+{{/if_equals}}
