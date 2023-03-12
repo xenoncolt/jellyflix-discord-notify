@@ -4,79 +4,98 @@
     "username": "{{{BotUsername}}}",
     "embeds": [
         {   
+            {{#if_equals ItemType 'Season'}}
             "author": {
-                {{#if_equals ItemType 'Season'}}
-                    "name": "Season Added • {{{SeriesName}}} {{{Name}}}",
-                {{/if_equals}}
-
-                {{#if_equals ItemType 'Episode'}}
-                    "name": "Episode Added • {{{SeriesName}}} S{{SeasonNumber00}}E{{EpisodeNumber00}} ~ {{{Name}}}",
-                {{/if_equals}}
-
-                {{#if_equals ItemType 'Movie'}}
-                    "name": "Movie Added • {{{Name}}}",
-                {{/if_equals}}
-
-                "url": "{{ServerUrl}}/web/index.html#!/details?id={{ItemId}}&serverId={{ServerId}}"
+                "name": "Season Added",
+                "icon_url": "https://cdn.discordapp.com/attachments/832180255103385650/1084492154619039754/2503508.png"
             },
-            
+            "title": "{{{SeriesName}}}",
+            "description": "{{{Overview}}}",
+            {{/if_equals}}
+
+
+
+            {{#if_equals ItemType 'Movie'}}
+            "author": {
+                "name": "Movie Added",
+                "icon_url": "https://cdn.discordapp.com/attachments/832180255103385650/1084492154619039754/2503508.png"
+            },
+            "title": "{{{Name}}}",
+            "description": "{{{Overview}}}",
+            {{/if_equals}}
+
+
+
+            {{#if_equals ItemType 'Episode'}}
+            "author": {
+                "name": "Episode Added",
+                "icon_url": "https://cdn.discordapp.com/attachments/832180255103385650/1084492154619039754/2503508.png"
+            },
+            "title": "{{{SeriesName}}}",
+            {{/if_equals}}
+
+            "fields": [
+            {{#if_equals ItemType 'Episode'}}
+            {
+                "name": "Name",
+                "value": "{{{Name}}}",
+                "inline": true
+            },
+            {
+                "name": "Season",
+                "value": "{{SeasonNumber00}}",
+                "inline": true
+            },
+            {
+                "name": "Episode",
+                "value": "{{EpisodeNumber00}}",
+                "inline": true
+            },
+            {
+                "name": "Overview",
+                "value": "{{{Overview}}}",
+                "inline": false
+            },
+            {{/if_equals}}
+            {
+                "name": "Year",
+                "value": "{{Year}}",
+                "inline": false
+            },
+            {
+                "name": "Watch Now",
+                "value": "[Jellyflix]({{ServerUrl}}/web/index.html#!/details?id={{ItemId}}&serverId={{ServerId}})",
+                "inline": true
+            },
+            {{#if_exist Provider_imdb~}}
+            {
+                "name": "IMDb",
+                "value": "[IMDb](https://www.imdb.com/title/{{Provider_imdb}}/)",
+                "inline": true
+            },
+            {{~/if_exist~}}
+            {{~#if_exist Provider_tmdb~}}        
+                {
+                    "name": "TMDb",
+                    {{~#if_equals ItemType 'Movie'~}}
+                        "value": "[TMDb](https://www.themoviedb.org/movie/{{Provider_tmdb}})",
+                    {{~else~}}
+                        "value": "[TMDb](https://www.themoviedb.org/tv/{{Provider_tmdb}})",
+                    {{~/if_equals~}}
+                    "inline": true
+                },
+            {{~/if_exist~}}
+            ]
 
             "thumbnail":{
                 "url": "{{ServerUrl}}/Items/{{ItemId}}/Images/Primary"
             },
 
-            "description": "
-            {{~#if_exist Overview~}}
-                > {{{Overview}}}\n\n
-            {{~/if_exist~}}
+            "image": {
+                "url": "{{ServerUrl}}/Items/{{ItemId}}/Images/Backdrop"
+            },
 
-            {{~#if_exist ServerUrl~}}
-                [**Watch Now** ]({{ServerUrl}}/web/index.html#!/details?id={{ItemId}}&serverId={{ServerId}})
-            {{~/if_exist~}}
-
-            {{~#if_exist Provider_imdb~}}
-                • [**IMDb** ](https://www.imdb.com/title/{{Provider_imdb}}/)
-            {{~/if_exist~}}
-            
-            {{~#if_exist Provider_tmdb~}}
-                {{~#if_equals ItemType 'Movie'~}}
-                    • [**TMDb** ](https://www.themoviedb.org/movie/{{Provider_tmdb}})
-                {{~else~}}
-                    • [**TMDb** ](https://www.themoviedb.org/tv/{{Provider_tmdb}})
-                {{~/if_equals~}}
-            {{~/if_exist~}}
-
-            {{~#if_exist Provider_tvmaze~}}
-                {{~#if_equals ItemType 'Episode'~}}
-                    • [**TVMaze** ](https://www.tvmaze.com/episodes/{{Provider_tvmaze}})
-                {{~/if_equals~}}
-
-                {{~#if_equals ItemType 'Series'~}}
-                    • [**TVMaze** ](https://www.tvmaze.com/shows/{{Provider_tvmaze}})
-                {{~/if_equals~}}
-            {{~/if_exist~}}
-
-            {{~#if_exist Provider_audiodbartist~}}
-                • [**AudioDb** ](https://theaudiodb.com/artist/{{Provider_audiodbartist}})
-            {{~/if_exist~}}
-
-            {{~#if_exist Provider_musicbrainzartist~}}
-                • [**MusicBrainz** ](https://musicbrainz.org/artist/{{Provider_musicbrainzartist}})
-            {{~/if_exist~}}
-
-            {{~#if_exist Provider_musicbrainztrack~}}
-                • [**MusicBrainz Track** ](https://musicbrainz.org/track/{{Provider_musicbrainztrack}})
-            {{~/if_exist~}}
-
-            {{~#if_exist Provider_musicbrainzalbum~}}
-                • [**MusicBrainz Album** ](https://musicbrainz.org/release/{{Provider_musicbrainzalbum}})
-            {{~/if_exist~}}
-
-            {{~#if_exist Provider_theaudiodbalbum~}}
-                • [**TADb Album** ](https://theaudiodb.com/album/{{Provider_theaudiodbalbum}})
-            {{~/if_exist~}}
-            ",
-
+            "url": "{{ServerUrl}}/web/index.html#!/details?id={{ItemId}}&serverId={{ServerId}}",
             "color": "{{EmbedColor}}",
 
             "footer": {
