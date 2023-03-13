@@ -12,9 +12,6 @@
             "title": "{{{SeriesName}}}",
             "description": "{{Overview}}",
             {{/if_equals}}
-
-
-
             {{#if_equals ItemType 'Movie'}}
             "author": {
                 "name": "Movie Added",
@@ -23,9 +20,6 @@
             "title": "{{{Name}}}",
             "description": "{{Overview}}",
             {{/if_equals}}
-
-
-
             {{#if_equals ItemType 'Episode'}}
             "author": {
                 "name": "Episode Added",
@@ -33,7 +27,6 @@
             },
             "title": "{{{SeriesName}}}",
             {{/if_equals}}
-
             "fields": [
             {{#if_equals ItemType 'Episode'}}
             {
@@ -86,23 +79,18 @@
                 },
             {{~/if_exist~}}
             ]
-
             "thumbnail":{
                 "url": "{{ServerUrl}}/Items/{{ItemId}}/Images/Primary"
             },
-
             "image": {
                 "url": "{{ServerUrl}}/Items/{{ItemId}}/Images/Backdrop"
             },
-
             "url": "{{ServerUrl}}/web/index.html#!/details?id={{ItemId}}&serverId={{ServerId}}",
             "color": "{{EmbedColor}}",
-
             "footer": {
                 "text": "{{{ServerName}}} ",
                 "icon_url": "{{AvatarUrl}}"
             },
-
             "timestamp": "{{Timestamp}}"
         }
     ]
